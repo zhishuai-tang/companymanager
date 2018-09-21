@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.telek.companymanager.dao.UserDao" >
+    <sql id="BASE_TABLE">
+    user
+  </sql>
+
+    <sql id="BASE_COLUMN">
+    id,job_num,username,telephone,entry_date,address,gender,birthday
+  </sql>
+
+    <insert id="insert" parameterType="com.telek.companymanager.entity.User">
+        INSERT INTO
+        <include refid="BASE_TABLE"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            id,username,password,entry_date,address,gender
+            <if test="job_num != null and '' != job_num">
+                job_num,
+            </if>
+            <if test="telephone != null and '' != telephone">
+                telephone,
+            </if>
+            <if test="address != null and '' != address">
+                address,
+            </if>
+            <if test="birthday != null and '' != birthday">
+                birthday,
+            </if>
+        </trim>
+        <trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+            #{id, jdbcType=INT},#{username, jdbcType=VARCHAR},#{password, jdbcType=VARCHAR},#{entry_date, jdbcType=DATE},#{gender, jdbcType=TINYINT},
+            <if test="job_num != null and '' != job_num">
+                #{job_num, jdbcType=INT}
+            </if>
+            <if test="telephone != null and '' != telephone">
+                #{telephone, jdbcType=VARCHAR}
+            </if>
+            <if test="address != null and '' != address">
+                #{address, jdbcType=VARCHAR}
+            </if>
+            <if test="birthday != null and '' != birthday">
+                #{birthday, jdbcType=DATE}
+            </if>
+        </trim>
+    </insert>
+
+    <select id="getUsers" resultType="com.telek.companymanager.entity.User">
+        SELECT
+        <include refid="BASE_COLUMN"/>
+        FROM
+        <include refid="BASE_TABLE"/>
+        WHERE 1=1
+        <if test="username != null and '' != username">
+            AND username like CONCAT('%',#{username},'%')
+        </if>
+        <if test="telephone != null and '' != telephone">
+            AND telephone = #{telephone}
+        </if>
+    </select>
+
+
+</mapper>
