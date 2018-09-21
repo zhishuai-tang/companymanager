@@ -13,7 +13,7 @@ spring:
     #基本属性
     url: jdbc:mariadb://localhost:3306/companymanager
     username: root
-    password: telek001
+    password: root
     #配置初始化大小/最小/最大
     initial-size: 1
     min-idle: 1
