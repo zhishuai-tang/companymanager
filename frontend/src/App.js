@@ -66,7 +66,7 @@ class App extends Component {
                 </div>
                 <div id="rightWrap">
                     <Menu mode="horizontal">
-                        <span className="sysTitle">北京京杭天丽科技有限公司信息管理系统</span>
+                        <span className="sysTitle">XX有限公司信息管理系统</span>
                         <SubMenu title={<span><Icon type="user" />{ this.state.username }</span>}>
                             <Menu.Item key="setting:1">退出</Menu.Item>
                         </SubMenu>
